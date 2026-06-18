@@ -3,8 +3,8 @@ import pandas as pd
 from supabase import create_client, Client
 
 st.set_page_config(
-    page_title="Quiniela - Resultados",
-    page_icon=":trophy:",
+    page_title="Quiniela 909 Fase 1",
+    page_icon="logo.ico",
     layout="wide"
 )
 
