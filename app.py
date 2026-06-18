@@ -86,10 +86,10 @@ try:
                     pos = df[df['nombre_participante'] == row['nombre_participante']].index[0] + 1
                     filas_busqueda += f"""
                         <tr style="color: #FF8C00; font-size: 20px; font-weight: bold;">
-                            <td style="width:50px; text-align:center;">{pos}</td>
-                            <td style="text-align:left;">{row['nombre_participante']}</td>
-                            <td style="width:110px; text-align:center;">{row['aciertos']}</td>
-                            <td style="width:100px; text-align:center;">{row['puntos']} pts</td>
+                            <td class="col-pos">{pos}</td>
+                            <td class="col-nombre">{row['nombre_participante']}</td>
+                            <td class="col-aciertos">{row['aciertos']}</td>
+                            <td class="col-puntos">{row['puntos']} pts</td>
                         </tr>
                     """
                 
@@ -100,11 +100,19 @@ try:
                         body {{
                             background-color: #0E1117;
                             font-family: Arial, sans-serif;
+                            margin: 0;
+                            padding: 0;
+                        }}
+                        .tabla-wrapper {{
+                            overflow-x: auto;
+                            -webkit-overflow-scrolling: touch;
+                            width: 100%;
                         }}
                         table {{
                             width: 100%;
                             border-collapse: collapse;
                             table-layout: fixed;
+                            min-width: 500px;
                         }}
                         th {{
                             text-align: left;
@@ -122,17 +130,65 @@ try:
                             overflow: hidden;
                             text-overflow: ellipsis;
                         }}
+                        .col-pos {{
+                            width: 50px;
+                            min-width: 50px;
+                            text-align: center;
+                        }}
+                        .col-nombre {{
+                            text-align: left;
+                            min-width: 150px;
+                        }}
+                        .col-aciertos {{
+                            width: 110px;
+                            min-width: 110px;
+                            text-align: center;
+                        }}
+                        .col-puntos {{
+                            width: 100px;
+                            min-width: 100px;
+                            text-align: center;
+                        }}
+                        @media (max-width: 600px) {{
+                            table {{
+                                min-width: 500px;
+                            }}
+                            th, td {{
+                                white-space: nowrap;
+                                overflow: visible;
+                                text-overflow: clip;
+                            }}
+                            th {{
+                                font-size: 12px;
+                                padding: 6px 5px;
+                            }}
+                            td {{
+                                padding: 3px 5px;
+                            }}
+                            .col-pos {{
+                                width: 40px;
+                                min-width: 40px;
+                            }}
+                            .col-aciertos {{
+                                width: 80px;
+                                min-width: 80px;
+                            }}
+                            .col-puntos {{
+                                width: 70px;
+                                min-width: 70px;
+                            }}
+                        }}
                     </style>
                 </head>
                 <body>
-                    <div style="overflow-x: auto;">
+                    <div class="tabla-wrapper">
                         <table>
                             <thead>
                                 <tr>
-                                    <th style="width:50px; text-align:center;">#</th>
-                                    <th style="text-align:left;">Participante</th>
-                                    <th style="width:110px; text-align:center;">Aciertos</th>
-                                    <th style="width:100px; text-align:center;">Puntos</th>
+                                    <th class="col-pos">#</th>
+                                    <th class="col-nombre">Participante</th>
+                                    <th class="col-aciertos">Aciertos</th>
+                                    <th class="col-puntos">Puntos</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -180,10 +236,10 @@ try:
             
             filas_tabla += f"""
                 <tr style="color: {color}; font-size: {tamano}px; font-weight: {'bold' if pos <= 3 else 'normal'};">
-                    <td style="width:50px; text-align:center;">{pos}</td>
-                    <td style="text-align:left;">{row['nombre_participante']}</td>
-                    <td style="width:110px; text-align:center;">{row['aciertos']}</td>
-                    <td style="width:100px; text-align:center;">{row['puntos']} pts</td>
+                    <td class="col-pos">{pos}</td>
+                    <td class="col-nombre">{row['nombre_participante']}</td>
+                    <td class="col-aciertos">{row['aciertos']}</td>
+                    <td class="col-puntos">{row['puntos']} pts</td>
                 </tr>
             """
         
@@ -194,11 +250,19 @@ try:
                 body {{
                     background-color: #0E1117;
                     font-family: Arial, sans-serif;
+                    margin: 0;
+                    padding: 0;
+                }}
+                .tabla-wrapper {{
+                    overflow-x: auto;
+                    -webkit-overflow-scrolling: touch;
+                    width: 100%;
                 }}
                 table {{
                     width: 100%;
                     border-collapse: collapse;
                     table-layout: fixed;
+                    min-width: 500px;
                 }}
                 th {{
                     text-align: left;
@@ -216,7 +280,34 @@ try:
                     overflow: hidden;
                     text-overflow: ellipsis;
                 }}
-                @media (max-width: 768px) {{
+                .col-pos {{
+                    width: 50px;
+                    min-width: 50px;
+                    text-align: center;
+                }}
+                .col-nombre {{
+                    text-align: left;
+                    min-width: 150px;
+                }}
+                .col-aciertos {{
+                    width: 110px;
+                    min-width: 110px;
+                    text-align: center;
+                }}
+                .col-puntos {{
+                    width: 100px;
+                    min-width: 100px;
+                    text-align: center;
+                }}
+                @media (max-width: 600px) {{
+                    table {{
+                        min-width: 500px;
+                    }}
+                    th, td {{
+                        white-space: nowrap;
+                        overflow: visible;
+                        text-overflow: clip;
+                    }}
                     th {{
                         font-size: 12px;
                         padding: 6px 5px;
@@ -224,18 +315,30 @@ try:
                     td {{
                         padding: 3px 5px;
                     }}
+                    .col-pos {{
+                        width: 40px;
+                        min-width: 40px;
+                    }}
+                    .col-aciertos {{
+                        width: 80px;
+                        min-width: 80px;
+                    }}
+                    .col-puntos {{
+                        width: 70px;
+                        min-width: 70px;
+                    }}
                 }}
             </style>
         </head>
         <body>
-            <div style="overflow-x: auto;">
+            <div class="tabla-wrapper">
                 <table>
                     <thead>
                         <tr>
-                            <th style="width:50px; text-align:center;">#</th>
-                            <th style="text-align:left;">Participante</th>
-                            <th style="width:110px; text-align:center;">Aciertos</th>
-                            <th style="width:100px; text-align:center;">Puntos</th>
+                            <th class="col-pos">#</th>
+                            <th class="col-nombre">Participante</th>
+                            <th class="col-aciertos">Aciertos</th>
+                            <th class="col-puntos">Puntos</th>
                         </tr>
                     </thead>
                     <tbody>
